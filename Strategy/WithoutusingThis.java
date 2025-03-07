@@ -56,6 +56,7 @@ class BlackandWhiteFilter implements Filter{
         System.out.println("Applying B&W filter");
 
 }
+
 }
 
 
