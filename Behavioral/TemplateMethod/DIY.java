@@ -50,7 +50,7 @@ abstract class Task{
         
     }
 
-    public abstract void doExecute();
+    protected abstract void doExecute();
 
 
 }
