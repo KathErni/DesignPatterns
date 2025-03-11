@@ -3,16 +3,9 @@ package Mediator;
 public class Main {
     public static void main(String[] args) {
         var dialog = new ArticledDialogBox();
-        dialog.simulateUserIntercation();
-
-        
-
-        
+        dialog.simulateUserIntercation();    
     }
 }
-
-
-
 class ListBox extends UIControl{
     
     public ListBox(DialogBox owner) {
@@ -31,13 +24,13 @@ class ListBox extends UIControl{
 }
 
 class TextBox extends UIControl{
+    private String content;
 
     public TextBox(DialogBox owner) {
             super(owner);
             
         }
     
-        private String content;
 
     public String getContent(){
         return content;
@@ -84,6 +77,7 @@ class ArticledDialogBox extends DialogBox{
 private ListBox articlesListBox = new ListBox(this);
 private TextBox titlTextBox = new TextBox(this);
 private Button saveButton = new Button(this);
+
 public void simulateUserIntercation(){
     articlesListBox.setSelection("Article 1");
     System.out.println("TextBox" + titlTextBox.getContent());
@@ -109,3 +103,4 @@ public void simulateUserIntercation(){
     }
     
 }
+
