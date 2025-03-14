@@ -15,11 +15,23 @@ public class Main {
 
 class ConfigManager{
     private Map<String, Object> settings = new HashMap<>();
-    private static ConfigManager instance = new ConfigManager();
+    //Declaring the instance variable as volatile to ensure 
+    //MultipleThreading
+    private static volatile ConfigManager instance = new ConfigManager();
 
-    ConfigManager(){};
+    private ConfigManager(){};
 
     public static ConfigManager getInstance() {
+        if(instance ==null){
+    //If instance is null it enters a sychnization to ensure
+    //One thread can enter the instance
+            synchronized (ConfigManager.class){
+                //checks it's null before creating another config manager.
+                if (instance == null){
+                    instance = new ConfigManager();
+                }
+            }
+        }
         return instance;
     }
 

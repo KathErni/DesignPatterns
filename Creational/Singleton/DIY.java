@@ -1,35 +1,38 @@
 package Creational.Singleton;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class DIY {
+    public static void main(String[] args) {
+        Logger logger = Logger.getInstance();
+        logger.log("This is the first log message.");
 
-   public static void main(String[] args) {
-    TaskManager task = TaskManager.getInstance();
-    task.set("computer", "add task");
+        Logger anotherLogger = Logger.getInstance();
+        anotherLogger.log("This is the second log message.");
 
-    TaskManager others = TaskManager.getInstance();
-    System.out.println(others.get("computer"));
-   }
-    
+        // Both logger and anotherLogger should be the same instance
+        System.out.println("Are both loggers the same instance? " + (logger == anotherLogger? "correct" : "wrong"));
+    }
 }
 
-class TaskManager{
-    private Map<String, Object> settings = new HashMap<>();
-    private static TaskManager instance= new TaskManager();
+class Logger {
+    
+    private static volatile Logger instance;
 
-    TaskManager(){};
+    private Logger() {}
 
-
-    public static TaskManager getInstance(){
+    public static Logger getInstance() {
+        if (instance == null) {
+            synchronized (Logger.class) {
+                if (instance == null) {
+                    instance = new Logger();
+                }
+            }
+        }
         return instance;
     }
 
-    public void set(String type, Object task){
-        settings.put(type,task);
+  
+    public void log(String message){
+        System.out.println("Log: " + message);
     }
-        public Object get(String type){
-            return settings.get(type);
-}
 }
