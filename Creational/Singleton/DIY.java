@@ -1,4 +1,4 @@
-package Creational.Singleton;
+
 
 
 public class DIY {
